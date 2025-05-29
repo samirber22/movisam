@@ -24,10 +24,35 @@ def rutas(request):
 def horarios(request):
     return render(request, 'horario.html')
 
+def buscar_ruta(request):
+    if request.method == 'POST':
+        origen = request.POST.get('origen', '').lower()
+        destino = request.POST.get('destino', '').lower()
+        
+        # Buscar rutas que coincidan con el origen y destino
+        rutas = Ruta.objects.filter(
+            activa=True,
+            origen__icontains=origen,
+            destino__icontains=destino
+        )
+        
+        if rutas.exists():
+            rutas_data = [{
+                'nombre': ruta.nombre,
+                'descripcion': ruta.descripcion,
+                'origen': ruta.origen,
+                'destino': ruta.destino,
+                'paradas': ruta.paradas.split('\n')
+            } for ruta in rutas]
+            return JsonResponse({'found': True, 'rutas': rutas_data})
+        else:
+            return JsonResponse({'found': False, 'message': 'No se encontraron rutas para este trayecto.'})
+    
+    return JsonResponse({'error': 'Método no permitido'}, status=405)
+
 @user_passes_test(lambda u: u.es_admin)
 def admin_rutas(request):
     if request.method == 'POST':
-        # Crear o actualizar ruta
         ruta_id = request.POST.get('ruta_id')
         if ruta_id:
             ruta = get_object_or_404(Ruta, id=ruta_id)
