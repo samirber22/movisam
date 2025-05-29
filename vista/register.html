@@ -1,0 +1,33 @@
+<!-- register.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="{% static 'css/stylelogin.css' %}" />
+  <title>Registrarse</title>
+</head>
+<body>
+  <div class="container active" id="container"> <!-- importante el "active" -->
+    <div class="form-container sign-up">
+      <form method="post">
+        <h1>Crear cuenta</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrarse</button>
+      </form>
+    </div>
+
+    <div class="toggle-container">
+      <div class="toggle">
+        <div class="toggle-panel toggle-left">
+          <h1>¿Ya tienes cuenta?</h1>
+          <p>Inicia sesión con tus datos</p>
+          <a class="hidden" href="{% url 'login' %}">Iniciar sesión</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

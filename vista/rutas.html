@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoviSam - Rutas</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="{% url 'inicio' %}"><img src="{% static 'img/logo2movisam.png' %}" alt="MoviSam Logo" class="logo"></a>
+            
+        </div>
+        <div class="input-search-container">
+                <input type="text" id="search" placeholder="Buscar Información..." aria-label="Buscar">
+                <button type="submit" class="button-search">🔍 Buscar</button>
+            </div>
+        <div class="user-menu-container">
+            <button id="user-icon-btn" class="user-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-person-square" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                </svg>
+            </button>
+
+            <div id="user-dropdown" class="dropdown-menu hidden">
+                <a href="{% url 'register' %}">Registrarse</a>
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+                
+            </div>
+        </div>
+        
+        
+        <div class="menu-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'inicio' %}">Inicio</a></li>
+            <li><a href="{% url 'rutas' %}" class="active">Rutas</a></li>
+            <li><a href="{% url 'horarios' %}">Horarios</a></li>
+            <li><a href="#">Información</a></li>
+        </ul>
+    </nav>
+
+    <main class="routes-container">
+        <h1>Rutas</h1>
+        <div class="routes-list">
+            <div class="route-item">
+                <div class="route-header">
+                    <span class="route-indicator"></span>
+                    <span class="route-name">SM101</span>
+                    <button class="expand-button">+</button>
+                </div>
+                <div class="route-content">
+                    <p>Detalles de la ruta SM101</p>
+                    <div class="route-stops">
+                        <h3>Paradas:</h3>
+                        <ul>
+                            <li>Parada 1</li>
+                            <li>Parada 2</li>
+                            <li>Parada 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat for other routes -->
+            <div class="route-item">
+                <div class="route-header">
+                    <span class="route-indicator"></span>
+                    <span class="route-name">SM102</span>
+                    <button class="expand-button">+</button>
+                </div>
+                <div class="route-content">
+                    <p>Detalles de la ruta SM102</p>
+                    <div class="route-stops">
+                        <h3>Paradas:</h3>
+                        <ul>
+                            <li>Parada 1</li>
+                            <li>Parada 2</li>
+                            <li>Parada 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more route items following the same pattern -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="contact-info">
+            <p>Contact: <a href="tel:3125558790">3125558790</a></p>
+            <p>Email: <a href="mailto:movisam@underlock.com">movisam@underlock.com</a></p>
+        </div>
+        <div class="social-links">
+            <div class="social-placeholder twitter"></div>
+            <div class="social-placeholder facebook"></div>
+            <div class="social-placeholder whatsapp"></div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/mostrarmenuser.js' %}"></script>
+
+    <script>
+        document.querySelectorAll('.route-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const routeItem = header.parentElement;
+                const content = header.nextElementSibling;
+                const expandButton = header.querySelector('.expand-button');
+                
+                // Toggle the active class
+                routeItem.classList.toggle('active');
+                
+                // Update the expand button text
+                expandButton.textContent = routeItem.classList.contains('active') ? '-' : '+';
+                
+                // Toggle content visibility
+                if (routeItem.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                } else {
+                    content.style.maxHeight = '0';
+                }
+            });
+        });
+    </script>
+</body>
+
+
+</html>
