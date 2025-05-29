@@ -19,6 +19,8 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('rutas/', views.rutas, name='rutas'),
     path('horarios/', views.horarios, name='horarios'),
+    path('admin-rutas/', views.admin_rutas, name='admin_rutas'),
+    path('eliminar-ruta/<int:ruta_id>/', views.eliminar_ruta, name='eliminar_ruta'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=os.path.join(settings.BASE_DIR, 'public'))

@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Rutas - MoviSam</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <header>
+        <!-- Header content same as other templates -->
+    </header>
+
+    <main class="route-management">
+        <h1>Administración de Rutas</h1>
+        
+        <form class="route-form" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="ruta_id" id="ruta_id">
+            <input type="text" name="nombre" placeholder="Nombre de la ruta" required>
+            <textarea name="descripcion" placeholder="Descripción de la ruta" required></textarea>
+            <input type="text" name="origen" placeholder="Origen" required>
+            <input type="text" name="destino" placeholder="Destino" required>
+            <textarea name="paradas" placeholder="Paradas (una por línea)" required></textarea>
+            <button type="submit">Guardar Ruta</button>
+        </form>
+
+        <div class="route-list">
+            {% for ruta in rutas %}
+            <div class="route-item">
+                <h3>{{ ruta.nombre }}</h3>
+                <p>{{ ruta.descripcion }}</p>
+                <p><strong>Origen:</strong> {{ ruta.origen }}</p>
+                <p><strong>Destino:</strong> {{ ruta.destino }}</p>
+                <div class="route-actions">
+                    <button class="edit-btn" onclick="editarRuta({{ ruta.id }})">Editar</button>
+                    <button class="delete-btn" onclick="eliminarRuta({{ ruta.id }})">Eliminar</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <script>
+        function editarRuta(rutaId) {
+            // Implementar lógica de edición
+        }
+
+        function eliminarRuta(rutaId) {
+            if (confirm('¿Estás seguro de que deseas eliminar esta ruta?')) {
+                fetch(`/eliminar-ruta/${rutaId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        location.reload();
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

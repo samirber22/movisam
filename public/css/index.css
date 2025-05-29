@@ -1,743 +1,130 @@
-:root {
-    --primary-blue: #172f92;
-    --primary-teal: #00a79d;
-    --primary-yellow: rgba(156, 183, 201, 0.354);
-    --white: #ffffff;
-    --light-gray: #f5f7fa;
-    --dark-gray: #4a5568;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-    --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --transition: all 0.3s ease;
+/* Add to the existing CSS file */
+.user-dropdown {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border: 2px solid #172f92;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    min-width: 200px;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: var(--light-gray);
-}
-
-/* Header */
-header {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: var(--primary-blue);
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: var(--white);
-}
-
-header .input-search-container {
-  position: relative;
-  width: 180px;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: width 0.4s ease-in-out;
-}
-
-header .input-search-container:focus-within {
-  width: 300px; /* se expande al enfocar el input */
-}
-
-.input-search-container input {
-    background-color: #fbfff4d0;
-  width: 100%;
-  padding: 12px 100px 12px 20px; /* deja espacio a la derecha para el botón */
-  font-size: 14px;
-  border: none;
-  outline: none;
-  transition: all 0.3s ease-in-out;
-}
-
-.input-search-container button {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  bottom: 5px;
-  padding: 0 20px;
-  background-color: var(--primary-teal);
-  color: white;
-  border: none;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    height: 50px;
-}
-
-.logo {
-    width: 120px;
-    height: 45px;
-    object-fit: cover
-}
-
-.menu-toggle {
-    display: none;
-}
-
-.menu-toggle .bar {
-    width: 25px;
-    height: 3px;
-    background-color: var(--white);
-    margin: 5px 0;
-}
-
-/* Navigation */
-nav {
-    background-color: var(--primary-yellow);
-    padding: 1rem;
-    font-family: "Smooch Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
-    font-size: 20px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-}
-nav a{
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 20px; 
-}
-nav a.active {
-    background-color: var(--primary-teal);
-    color: white;
-}
-
-/* Route Finder */
-.route-finder-container {
-    max-width: 1400px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
-}
-
-.section-title {
-    font-family: "Smooch Sans", sans-serif;
-    font-size: 2.5rem;
-    color: var(--primary-blue);
-    text-align: center;
-    margin-bottom: 2rem;
-    position: relative;
-}
-
-.section-title:after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    width: 100px;
-    height: 4px;
-    background: linear-gradient(to right, var(--primary-blue), var(--primary-teal));
-    transform: translateX(-50%);
-    border-radius: 2px;
-}
-
-.route-finder {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    gap: 2rem;
-    background-color: var(--white);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: var(--card-shadow);
-}
-
-.map-wrapper {
-    flex: 2;
-    min-height: 500px;
-    position: relative;
-}
-
-.map-placeholder {
-    height: 100%;
-    width: 100%;
-    border-radius: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.route-inputs-wrapper {
-    flex: 1;
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.route-inputs {
-    background-color: var(--white);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-.route-inputs h3 {
-    color: var(--primary-blue);
-    margin-bottom: 1.5rem;
-    font-family: "Smooch Sans", sans-serif;
-    font-size: 1.8rem;
-    position: relative;
-}
-
-.route-inputs h3:after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background-color: var(--primary-teal);
-    border-radius: 1.5px;
-}
-
-.input-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.25rem;
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: var(--transition);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.input-container:focus-within {
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 0 3px rgba(23, 47, 146, 0.1);
-}
-
-.icon-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background-color: #f8fafc;
-}
-
-.input-container input {
-    flex: 1;
-    padding: 1rem;
-    border: none;
-    background-color: transparent;
-    font-size: 1rem;
-    color: var(--dark-gray);
-    width: 100%;
-    outline: none;
-}
-
-.input-container input::placeholder {
-    color: #a0aec0;
-}
-
-.buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.ver-rutas, .buscar-ruta {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    flex: 1;
-    padding: 1rem;
-    border: none;
-    border-radius: 10px;
+.user-greeting {
+    color: #172f92;
+    font-size: 1.1rem;
     font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.ver-rutas {
-    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
-    color: white;
-    box-shadow: 0 4px 6px rgba(66, 153, 225, 0.3);
-}
-
-.buscar-ruta {
-    background: linear-gradient(135deg, #00a79d 0%, #008b83 100%);
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 167, 157, 0.3);
-}
-
-.ver-rutas:hover, .buscar-ruta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-}
-
-.ver-rutas:active, .buscar-ruta:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Slider */
-.slider {
-    position: relative;
-    height: 500px;
-    overflow: hidden;
-}
-
-.slides {
-    position: relative;
-    height: 100%;
-    width: 200%;
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-    position: relative;
-    width: 50%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    margin-bottom: 10px;
     text-align: center;
+    padding: 10px;
+    border-bottom: 2px solid #e9ecef;
 }
 
-.slide::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
-}
-
-.slide h2, .slide p {
-    position: relative;
-    z-index: 2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.slide h2 {
-    font-size: 2.5em;
-    margin-bottom: 1rem;
-}
-
-.slide p {
-    font-size: 1.2em;
-}
-
-.slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.3);
+.user-dropdown button {
+    width: 100%;
+    padding: 10px 15px;
+    margin-top: 10px;
+    background: linear-gradient(135deg, #172f92, #00a79d);
     color: white;
     border: none;
-    border-radius: 50%;
-    font-size: 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
     cursor: pointer;
-    z-index: 10;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
 }
 
-.slider-arrow:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+.user-dropdown button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.slider-arrow.left {
-    left: 20px;
+.admin-controls {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #e9ecef;
 }
 
-.slider-arrow.right {
-    right: 20px;
-}
-
-.slider-dots {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 10;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.dot.active {
-    background-color: white;
-    transform: scale(1.2);
-}
-
-/* Footer */
-footer {
-    background-color: var(--primary-blue);
-    color: var(--white);
-    padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2rem;
-}
-
-footer a {
-    color: var(--white);
+.admin-controls a {
+    display: block;
+    padding: 8px 12px;
+    margin: 5px 0;
+    color: #172f92;
     text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
 }
 
-.social-links {
-    display: flex;
-    gap: 1rem;
+.admin-controls a:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
 }
 
-.social-placeholder {
-    width: 40px;
-    height: 40px;
-    background-color: #ccc;
-    border-radius: 50%;
-    transition: transform 0.3s;
+/* Route management styles */
+.route-management {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.social-placeholder:hover {
-    transform: scale(1.1);
+.route-form {
+    display: grid;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* Routes Page Styles */
-.routes-container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+.route-form input,
+.route-form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 
-.routes-container h1 {
-    color: var(--primary-blue);
-    margin-bottom: 2rem;
-    font-size: 2.5rem;
+.route-form button {
+    background: linear-gradient(135deg, #172f92, #00a79d);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-.routes-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.route-list {
+    margin-top: 20px;
 }
 
 .route-item {
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.route-header {
-    background-color: var(--primary-blue);
-    color: white;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.route-header:hover {
-    background-color: #000066;
-}
-
-.route-indicator {
-    width: 4px;
-    height: 24px;
-    background-color: var(--primary-yellow);
-    margin-right: 1rem;
-}
-
-.route-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    flex-grow: 1;
-}
-
-.expand-button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.route-content {
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    background-color: #f8f9fa;
-}
-
-.route-item.active .route-content {
-    padding: 1rem;
-    max-height: 500px;
-}
-
-.route-stops {
-    margin-top: 1rem;
-}
-
-.route-stops h3 {
-    color: var(--primary-blue);
-    margin-bottom: 0.5rem;
-}
-
-.route-stops ul {
-    list-style: none;
-    padding-left: 1rem;
-}
-
-.route-stops li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
-}
-
-.route-stops li:last-child {
-    border-bottom: none;
-}
-
-.user-menu-container {
-    position: relative;
-    display: inline-block;
-}
-
-.user-icon {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.dropdown-menu {
-    position: absolute;
-    right: 0;
-    align-items: center;
-    top: 100%;
-    background-color: rgb(218, 213, 213);
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    min-width: 150px;
-    z-index: 1000;
-    padding: 10px 0 20px 0;
-    font-family: "Play", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    gap: 0.4rem;
-}
-
-.dropdown-menu a {
-    color: rgb(70, 86, 140);
-    text-decoration: none;
-    padding: 8px 16px;
-    transition: background-color 0.2s;
-}
-
-.dropdown-menu a:hover {
-    background-color: #bdb048;
-    color: white;
-}
-
-.hidden {
-    display: none;
-}
-
-/* Modal user */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 2rem;
+    background: #f8f9fa;
     border-radius: 10px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-    text-align: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
 }
 
-.modal-content input{
-    width: 80%;
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.route-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.modal-buttons {
-    margin-top: 1rem;
+.route-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-.modal-buttons button {
-    padding: 0.5rem 1rem;
-    margin: 0.5rem;
+.route-actions button {
+    padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: var(--primary-blue);
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.delete-btn {
+    background-color: #dc3545;
     color: white;
-}
-
-.modal-buttons button:hover {
-    background-color: #000066;
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .route-finder {
-        gap: 1.5rem;
-    }
-    
-    .map-wrapper {
-        min-height: 450px;
-    }
-}
-
-@media (max-width: 992px) {
-    .route-finder {
-        flex-direction: column;
-    }
-    
-    .map-wrapper {
-        min-height: 400px;
-    }
-    
-    .route-inputs-wrapper {
-        padding: 1.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .slider {
-        height: 400px;
-    }
-    
-    .slide h2 {
-        font-size: 2em;
-    }
-    
-    .map-wrapper {
-        min-height: 350px;
-    }
-    
-    .buttons {
-        flex-direction: column;
-    }
-
-    footer {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .header {
-        padding: 0.75rem;
-    }
-    
-    .logo {
-        width: 100px;
-    }
-    
-    .input-search-container {
-        width: 140px;
-    }
-    
-    .input-search-container:focus-within {
-        width: 200px;
-    }
-    
-    .slider {
-        height: 300px;
-    }
-    
-    .slide h2 {
-        font-size: 1.75em;
-    }
-    
-    .slide p {
-        font-size: 1em;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .route-inputs h3 {
-        font-size: 1.5rem;
-    }
-    
-    .input-container {
-        margin-bottom: 1rem;
-    }
-    
-    .icon-placeholder {
-        width: 40px;
-        height: 45px;
-    }
 }
