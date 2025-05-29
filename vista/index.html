@@ -35,10 +35,9 @@
                 {% if user.is_authenticated %}
                     <span style="padding: 0 16px;">Hola, {{ user.username }}</span>
                     <form method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button type="submit">Cerrar sesión</button>
+                        {% csrf_token %}
+                        <button type="submit">Cerrar sesión</button>
                     </form>
-
                 {% else %}
                     <a href="{% url 'register' %}">Registrarse</a>
                     <a href="{% url 'login' %}">Iniciar sesión</a>
