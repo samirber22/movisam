@@ -1,4 +1,3 @@
-<!-- register.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -9,12 +8,26 @@
   <title>Registrarse</title>
 </head>
 <body>
-  <div class="container active" id="container"> <!-- importante el "active" -->
+  <div class="container active" id="container">
     <div class="form-container sign-up">
       <form method="post">
         <h1>Crear cuenta</h1>
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for field in form %}
+          {% if field.name == 'fecha_nacimiento' %}
+            <div class="form-field">
+              <label for="{{ field.id_for_label }}">Fecha de nacimiento:</label>
+              {{ field }}
+            </div>
+          {% else %}
+            {{ field }}
+          {% endif %}
+          {% if field.errors %}
+            <div class="error-message">
+              {{ field.errors }}
+            </div>
+          {% endif %}
+        {% endfor %}
         <button type="submit">Registrarse</button>
       </form>
     </div>
