@@ -89,28 +89,32 @@
             <div class="route-inputs-wrapper">
                 <div class="route-inputs">
                     <h3>¿A dónde quieres ir?</h3>
-                    <div class="input-container">
-                        <div class="icon-placeholder">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#172f92" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
+                    <form id="route-search-form" method="POST">
+                        {% csrf_token %}
+                        <div class="input-container">
+                            <div class="icon-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#172f92" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
+                            </div>
+                            <input type="text" id="origin" name="origen" placeholder="Tu ubicación" aria-label="Origen" required>
                         </div>
-                        <input type="text" id="origin" placeholder="Tu ubicación" aria-label="Origen">
-                    </div>
-                    <div class="input-container">
-                        <div class="icon-placeholder">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#172f92" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <div class="input-container">
+                            <div class="icon-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#172f92" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <input type="text" id="destination" name="destino" placeholder="¿A dónde vas?" aria-label="Destino" required>
                         </div>
-                        <input type="text" id="destination" placeholder="¿A dónde vas?" aria-label="Destino">
-                    </div>
-                    <div class="buttons">
-                        <a href="{% url 'rutas' %}" class="ver-rutas">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17h-7a2 2 0 0 1-2-2V5"/><path d="M20 5H6a2 2 0 0 0-2 2v10"/><path d="m16 15-4 4 4 4"/></svg>
-                            Ver rutas
-                        </a>
-                        <button id="buscarRuta" class="buscar-ruta">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                            Buscar ruta
-                        </button>
-                    </div>
+                        <div class="buttons">
+                            <a href="{% url 'rutas' %}" class="ver-rutas">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17h-7a2 2 0 0 1-2-2V5"/><path d="M20 5H6a2 2 0 0 0-2 2v10"/><path d="m16 15-4 4 4 4"/></svg>
+                                Ver rutas
+                            </a>
+                            <button type="submit" id="buscarRuta" class="buscar-ruta">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                Buscar ruta
+                            </button>
+                        </div>
+                    </form>
+                    <div id="search-results" class="search-results"></div>
                 </div>
             </div>
         </div>
@@ -254,6 +258,56 @@
         setInterval(() => moveSlide(1), 5000);
     </script>
 
-    
+    <script>
+        document.getElementById('route-search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const resultsDiv = document.getElementById('search-results');
+            
+            fetch('/buscar-ruta/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.found) {
+                    let html = '<div class="routes-found">';
+                    data.rutas.forEach(ruta => {
+                        html += `
+                            <div class="route-result">
+                                <h4>${ruta.nombre}</h4>
+                                <p>${ruta.descripcion}</p>
+                                <p><strong>Origen:</strong> ${ruta.origen}</p>
+                                <p><strong>Destino:</strong> ${ruta.destino}</p>
+                                <div class="paradas">
+                                    <strong>Paradas:</strong>
+                                    <ul>
+                                        ${ruta.paradas.map(parada => `<li>${parada}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                    resultsDiv.innerHTML = html;
+                } else {
+                    resultsDiv.innerHTML = `
+                        <div class="no-routes-found">
+                            <p>${data.message}</p>
+                        </div>
+                    `;
+                }
+                resultsDiv.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultsDiv.innerHTML = '<div class="error">Error al buscar rutas. Por favor, intenta de nuevo.</div>';
+            });
+        });
+    </script>
 </body>
 </html>

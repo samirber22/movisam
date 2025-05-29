@@ -1,130 +1,71 @@
 /* Add to the existing CSS file */
-.user-dropdown {
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    border: 2px solid #172f92;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    min-width: 200px;
-}
 
-.user-greeting {
-    color: #172f92;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    text-align: center;
-    padding: 10px;
-    border-bottom: 2px solid #e9ecef;
-}
-
-.user-dropdown button {
-    width: 100%;
-    padding: 10px 15px;
-    margin-top: 10px;
-    background: linear-gradient(135deg, #172f92, #00a79d);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.user-dropdown button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.admin-controls {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 2px solid #e9ecef;
-}
-
-.admin-controls a {
-    display: block;
-    padding: 8px 12px;
-    margin: 5px 0;
-    color: #172f92;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-
-.admin-controls a:hover {
-    background-color: #e9ecef;
-    transform: translateX(5px);
-}
-
-/* Route management styles */
-.route-management {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.route-form {
-    display: grid;
-    gap: 15px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.route-form input,
-.route-form textarea {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-.route-form button {
-    background: linear-gradient(135deg, #172f92, #00a79d);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.route-list {
+.search-results {
     margin-top: 20px;
+    display: none;
 }
 
-.route-item {
-    background: #f8f9fa;
-    border-radius: 10px;
-    padding: 15px;
+.routes-found {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.route-result {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.route-result:last-child {
+    border-bottom: none;
+}
+
+.route-result h4 {
+    color: #172f92;
     margin-bottom: 10px;
-    transition: all 0.3s ease;
+    font-size: 1.2rem;
 }
 
-.route-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.route-result p {
+    margin: 5px 0;
+    color: #666;
 }
 
-.route-actions {
-    display: flex;
-    gap: 10px;
+.paradas {
     margin-top: 10px;
 }
 
-.route-actions button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.paradas ul {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 5px;
 }
 
-.edit-btn {
-    background-color: #ffc107;
-    color: #000;
+.paradas li {
+    position: relative;
+    padding: 5px 0;
 }
 
-.delete-btn {
-    background-color: #dc3545;
-    color: white;
+.paradas li:before {
+    content: "•";
+    color: #00a79d;
+    position: absolute;
+    left: -15px;
+}
+
+.no-routes-found {
+    background: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    color: #666;
+}
+
+.error {
+    background: #fee;
+    color: #c00;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
 }
